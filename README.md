@@ -6,7 +6,7 @@
 
 - User Login
 - User Dashboard
-  - User can all the tasks assign to them
+  - User can see all the tasks assign to them
 - Admin Dashboard
   - View all users with their tasks
   - Create new users
