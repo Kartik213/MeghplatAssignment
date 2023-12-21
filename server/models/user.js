@@ -3,18 +3,18 @@ const mongoose = require("mongoose");
 const userSchema = new mongoose.Schema({
   name: {
     type: String,
-    required: true,
+    required: [true, "Name can not be emplty"],
   },
   email: {
     type: String,
-    required: true,
+    required: [true, "Email can not be empty"],
     max: 200,
-    unique: true,
+    unique: [true, "Email already exist"],
+    match: [/\S+@\S+\.\S+/, "Please fill a valid email address"],
   },
   password: {
     type: String,
-    required: true,
-    min: 5,
+    required: [true, "Password can not be empty"],
   },
   isAdmin: {
     type: Boolean,

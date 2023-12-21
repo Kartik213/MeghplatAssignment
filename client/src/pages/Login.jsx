@@ -16,6 +16,14 @@ const Login = () => {
   const handleClick = async (e) => {
     e.preventDefault();
     try {
+      if(inputs.email === ""){
+        toast.error("Email cannot be empty");
+        return ;
+      }
+      if (inputs.password === "") {
+        toast.error("Password cannot be empty");
+        return;
+      }
       const res = await axios.post("http://localhost:3000/user/login", inputs);
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("isAdmin", res.data.user.isAdmin);
@@ -43,7 +51,8 @@ const Login = () => {
                 placeholder="Enter your email"
                 name="email"
                 onChange={handleChange}
-                 autoComplete="on"
+                autoComplete="on"
+                required
               />
             </Form.Group>
             <Form.Group controlId="password">
@@ -53,7 +62,8 @@ const Login = () => {
                 placeholder="Enter your password"
                 name="password"
                 onChange={handleChange}
-                 autoComplete="on"
+                autoComplete="on"
+                required
               />
             </Form.Group>
             <Form.Group controlId="submit" className="text-center">

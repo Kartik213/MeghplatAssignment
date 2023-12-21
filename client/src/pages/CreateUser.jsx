@@ -22,6 +22,18 @@ const CreateUser = () => {
   }
   const handleClick = async (e) => {
     e.preventDefault();
+    if(inputs.email === ""){
+      toast.error("Email can not be empty");
+      return ;
+    }
+    if(inputs.name === ""){
+      toast.error("Name can not be empty");
+      return ;
+    }
+    if(inputs.password === ""){
+      toast.error("Password cannot be empty")
+      return ;
+    }
     try {
       const token = localStorage.getItem("token");
       await axios.post("http://localhost:3000/dashboard/createUser", inputs, {

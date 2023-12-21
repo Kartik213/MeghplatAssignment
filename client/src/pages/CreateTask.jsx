@@ -18,6 +18,18 @@ const CreateTask = () => {
 
   const handleClick = async (e) => {
     e.preventDefault();
+    if(inputs.email === ""){
+      toast.error("Email can not be empty");
+      return ;
+    }
+    if(inputs.title === ""){
+      toast.error("Title is required");
+      return ;
+    }
+    if(inputs.description === ""){
+      toast.error("Description is required")
+      return ;
+    }
     const token = localStorage.getItem("token");
     const assignedBy = localStorage.getItem("name");
     const updatedInputs = { ...inputs, assignedBy };
@@ -50,7 +62,7 @@ const CreateTask = () => {
                 placeholder="Enter user's email"
                 name="email"
                 onChange={handleChange}
-                 autoComplete="on"
+                autoComplete="on"
               />
             </Form.Group>
             <Form.Group controlId="title">
@@ -60,7 +72,7 @@ const CreateTask = () => {
                 placeholder="Enter task title"
                 name="title"
                 onChange={handleChange}
-                 autoComplete="on"
+                autoComplete="on"
               />
             </Form.Group>
             <Form.Group controlId="description">
@@ -70,7 +82,7 @@ const CreateTask = () => {
                 placeholder="Enter task description"
                 name="description"
                 onChange={handleChange}
-                 autoComplete="on"
+                autoComplete="on"
                 rows={3}
               />
             </Form.Group>

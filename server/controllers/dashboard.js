@@ -21,6 +21,11 @@ const getAllUsersAndTasks = async (req, res) => {
 const createNewUser = async (req, res) => {
   try {
     const { name, email, password, isAdmin } = req.body;
+    const user = await User.findOne({email: email});
+    if(user){
+      res.status(404).json({ message: "User already exist" });
+      return;
+    }
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
     const newUser = new User({
@@ -41,7 +46,11 @@ const createNewUser = async (req, res) => {
 const newTask = async (req, res) => {
     try{
         const { email, title, description, assignedBy } = req.body;
-        const user = await User.findOne({email: email})
+        const user = await User.findOne({email: email});
+        if(!user){
+          res.status(404).json({message: "User does not exist"})
+          return ;
+        }
         const newTask = new Task({
           userId: user._id,
           title,
